@@ -1,8 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
+import { NextApiRequest, NextApiResponse } from "next";
 import { Applications, ApplicationsCategory } from "../../../models";
 
-export default async ({ method }, res) => {
+export default async ({ method }: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case "GET":
       const doc = await ApplicationsCategory.findAll({

@@ -1,6 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-export default ({ method }, res) => {
+import { NextApiRequest, NextApiResponse } from "next";
+
+export default async ({ method }: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case "GET":
       return res.json({

@@ -4,8 +4,9 @@ import { Layout } from "../components/layout";
 import { store } from "../redux";
 import "../styles/globals.css";
 import Head from "next/head";
+import { AppProps } from "next/app";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <Head>

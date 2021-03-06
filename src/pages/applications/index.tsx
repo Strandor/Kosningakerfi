@@ -6,8 +6,12 @@ import {
   MarginWrapper,
 } from "../../components";
 import { TitleHeader } from "../../components/atom/TitleHeader";
-import { fetchApplications } from "../../redux";
-import { IProps } from "./interface";
+import { ApplicationsState, fetchApplications, StoreState } from "../../redux";
+
+export interface IProps {
+  applications: ApplicationsState;
+  fetchApplications: typeof fetchApplications;
+}
 
 export const Applications = ({ applications, fetchApplications }: IProps) => {
   useEffect(() => {
@@ -21,12 +25,13 @@ export const Applications = ({ applications, fetchApplications }: IProps) => {
           return (
             <>
               <TitleHeader>{application.name}</TitleHeader>
-              {application.applications.map((application) => {
-                <ApplicationBox
-                  key={application.id}
-                  application={application}
-                />;
-              })}
+              {application.applications &&
+                application.applications.map((application) => {
+                  <ApplicationBox
+                    key={application.id}
+                    application={application}
+                  />;
+                })}
             </>
           );
         })}
@@ -35,7 +40,7 @@ export const Applications = ({ applications, fetchApplications }: IProps) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: StoreState) => ({
   applications: state.applications,
 });
 

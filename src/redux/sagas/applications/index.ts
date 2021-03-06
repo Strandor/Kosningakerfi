@@ -1,11 +1,11 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { all, put, takeLatest } from "redux-saga/effects";
 import {
   ApplicationsActions,
   selectApplication,
   selectApplicationSuccess,
 } from "../..";
-import { IApplications, IApplicationsCategory } from "../../../models";
+import { IApplications } from "../../../models";
 import {
   fetchApplicationsFailure,
   fetchApplicationsSuccess,
@@ -15,7 +15,9 @@ import { ExtractActionFromActionCreator } from "../../types";
 
 export function* onFetchApplications() {
   try {
-    const res = yield axios.get<IApplicationsCategory[]>("/api/applications");
+    const res: AxiosResponse<IApplications[]> = yield axios.get<
+      IApplications[]
+    >("/api/applications");
 
     yield put(fetchApplicationsSuccess(res.data));
   } catch (error) {
@@ -27,7 +29,7 @@ export function* onSelectApplication(
   action: ExtractActionFromActionCreator<typeof selectApplication>
 ) {
   try {
-    const res = yield axios.get<IApplications>(
+    const res: AxiosResponse<IApplications> = yield axios.get<IApplications>(
       `/api/applications/${action.payload}`
     );
 
