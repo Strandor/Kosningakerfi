@@ -1,0 +1,21 @@
+.outer {
+  margin: 10px 0;
+}
+
+.header {
+  background-color: #f0f3f4;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+}
+
+.title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 14px;
+  flex: 1;
+}
+
+.inner {
+  margin: 0 20px;
+}

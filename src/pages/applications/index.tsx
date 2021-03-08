@@ -26,12 +26,12 @@ export const Applications = ({ applications, fetchApplications }: IProps) => {
             <>
               <TitleHeader>{application.name}</TitleHeader>
               {application.applications &&
-                application.applications.map((application) => {
+                application.applications.map((application) => (
                   <ApplicationBox
                     key={application.id}
                     application={application}
-                  />;
-                })}
+                  />
+                ))}
             </>
           );
         })}

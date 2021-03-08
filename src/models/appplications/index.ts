@@ -5,6 +5,7 @@ import { IApplications } from "./interface";
 export class Applications extends Model implements IApplications {
   public id: string;
   public name: string;
+  public numApplicants: number;
 }
 
 Applications.init(
@@ -21,6 +22,11 @@ Applications.init(
     applicationCategoryId: {
       type: DataTypes.UUID,
       allowNull: false,
+    },
+    numApplicants: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
     },
   },
   {
