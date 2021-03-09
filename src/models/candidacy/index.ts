@@ -31,6 +31,8 @@ export class Candidacy extends Model implements ICandidacy {
     try {
       if (!applicaiton) throw Error("Application does not exist");
 
+      if (!candidacy.candidats) throw Error("Vantar nemendur");
+
       const min = applicaiton.getDataValue("minNumApplicants");
       if (min > candidacy.candidats.length)
         throw Error("Vantar nemendur a.m.k." + min);

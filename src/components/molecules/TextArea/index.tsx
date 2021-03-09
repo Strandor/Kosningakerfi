@@ -8,6 +8,7 @@ export const TextArea = ({ text, id, onChange }: IProps) => {
       <TitleHeader>{text}</TitleHeader>
       <textarea
         id={id}
+        placeholder={text}
         className={styles.input}
         rows={10}
         onChange={onChange}

@@ -12,7 +12,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <Provider store={store}>
       <Head>
-        <title>Kosningakerfi</title>
+        <title>Kosningar</title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1"
+        ></meta>
       </Head>
       <GlobalAlert />
       <Component {...pageProps} />
