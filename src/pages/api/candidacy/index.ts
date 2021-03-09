@@ -10,14 +10,9 @@ export default async (
   switch (method) {
     case "POST":
       try {
-        await Candidacy.create(
-          {
-            ...body,
-          },
-          {
-            fields: ["name", "description", "applicationId"],
-          }
-        );
+        await Candidacy.createCandidacy({
+          ...body,
+        });
 
         return res.json({});
       } catch (error) {

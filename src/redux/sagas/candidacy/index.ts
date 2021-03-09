@@ -7,6 +7,7 @@ import {
 } from "../..";
 import { IApplications } from "../../../models";
 import {
+  createAlert,
   createCandidacy,
   createCandidacyFailure,
   createCandidacySuccess,
@@ -14,7 +15,7 @@ import {
   fetchApplicationsSuccess,
   selectApplicationFailure,
 } from "../../actions";
-import { ExtractActionFromActionCreator } from "../../types";
+import { ExtractActionFromActionCreator, GenericError } from "../../types";
 
 function* onCreateCandidacy(
   action: ExtractActionFromActionCreator<typeof createCandidacy>
@@ -28,6 +29,17 @@ function* onCreateCandidacy(
   }
 }
 
+function* onCreateCandiacyFailure(
+  error: ExtractActionFromActionCreator<typeof createCandidacyFailure>
+) {
+  yield put(
+    createAlert(error.error.response.data.message ?? error.error.message)
+  );
+}
+
 export function* candidacy() {
-  yield all([yield takeLatest("CREATE_CANDIDACY", onCreateCandidacy)]);
+  yield all([
+    yield takeLatest("CREATE_CANDIDACY", onCreateCandidacy),
+    yield takeLatest("CREATE_CANDIDACY_FAILURE", onCreateCandiacyFailure),
+  ]);
 }

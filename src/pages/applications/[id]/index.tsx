@@ -19,7 +19,7 @@ import {
 import { useRouter } from "next/router";
 import _ from "lodash";
 import { FieldArray, Formik, useFormik } from "formik";
-import Error from "next/error";
+import NextError from "next/error";
 
 export interface IProps {
   applications: ApplicationsState;
@@ -37,7 +37,7 @@ export const Application = ({
   const router = useRouter();
   const id = router.query.id;
 
-  if (!id || typeof id !== "string") return <Error statusCode={404} />;
+  if (!id || typeof id !== "string") return <NextError statusCode={404} />;
 
   useEffect(() => {
     if (typeof id == "string") selectApplication(id);
@@ -53,6 +53,9 @@ export const Application = ({
       });
     },
   });
+
+  if (!applications.selected && !applications.isLoading)
+    return <NextError statusCode={404} />;
 
   return (
     <LoadingWrapper isLoading={applications.isLoading}>
@@ -78,12 +81,12 @@ export const Application = ({
           </DropdownItem>
           <DropdownItem text={"Nemendur"}>
             <FieldArray
-              name={"candidates"}
+              name={"candidats"}
               validateOnChange={false}
               render={() =>
                 _.times(applications.selected?.numApplicants, (index) => (
                   <InputText
-                    id={`candidates.${index}.name`}
+                    id={`candidats.${index}.name`}
                     text={"Nafn"}
                     onChange={formik.handleChange}
                   />

@@ -1,6 +1,7 @@
 import { ApplicationsCategory } from "./applicationsCategory";
 import { Applications } from "./appplications";
 import { Candidacy } from "./candidacy";
+import { Candidats } from "./candidats";
 
 ApplicationsCategory.hasMany(Applications, {
   foreignKey: "applicationCategoryId",
@@ -14,6 +15,14 @@ Candidacy.belongsTo(Applications, {
 });
 Applications.hasMany(Candidacy, {
   foreignKey: "applicationId",
+});
+
+Candidats.belongsTo(Candidacy, {
+  foreignKey: "candidacyId",
+});
+
+Candidacy.hasMany(Candidats, {
+  foreignKey: "candidacyId",
 });
 
 export * from "./applicationsCategory";
