@@ -1,6 +1,5 @@
 import { IProps } from "./interface";
 import styles from "./DropDownItem.module.css";
-import DownArrow from "../../../../public/images/downarrow.svg";
 
 export const DropdownItem = ({ text, children }: IProps) => {
   return (
