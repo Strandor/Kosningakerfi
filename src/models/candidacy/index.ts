@@ -7,9 +7,11 @@ import {
 import { sequelizeInstance } from "../../utils.ts";
 import { Applications } from "../appplications";
 import { Candidats } from "../candidats";
+import { ICandidats } from "../candidats/interface";
 import { ICandidacy } from "./interface";
 
 export class Candidacy extends Model implements ICandidacy {
+  public candidats: ICandidats[];
   public id: string;
   public name: string;
   public description: string;
@@ -21,7 +23,7 @@ export class Candidacy extends Model implements ICandidacy {
       where: {
         id: candidacy.applicationId,
       },
-      attributes: ["numApplicants"],
+      attributes: ["minNumApplicants", "maxNumApplicants"],
     });
 
     const t = await sequelizeInstance.transaction();
@@ -29,10 +31,13 @@ export class Candidacy extends Model implements ICandidacy {
     try {
       if (!applicaiton) throw Error("Application does not exist");
 
-      const numApplicants = applicaiton.getDataValue("numApplicants");
+      const min = applicaiton.getDataValue("minNumApplicants");
+      if (min > candidacy.candidats.length)
+        throw Error("Vantar nemendur a.m.k." + min);
 
-      if (numApplicants !== candidacy.candidats?.length)
-        throw Error("Vantar nemendur");
+      const max = applicaiton.getDataValue("maxNumApplicants");
+      if (max < candidacy.candidats.length)
+        throw Error("Of margir nemendur ekki fleiri en " + max);
 
       const doc = await Candidacy.create(candidacy, {
         transaction: t,

@@ -93,12 +93,14 @@ export const Application = ({
                 onChange={formik.handleChange}
               />
             </DropdownItem>
-            <DropdownItem text={"Nemendur"}>
+            <DropdownItem
+              text={`Nemendur (${applications.selected?.minNumApplicants}-${applications.selected?.maxNumApplicants})`}
+            >
               <FieldArray
                 name={"candidats"}
                 validateOnChange={false}
                 render={() =>
-                  _.times(applications.selected?.numApplicants, (index) => (
+                  _.times(applications.selected?.maxNumApplicants, (index) => (
                     <InputText
                       id={`candidats.${index}.name`}
                       text={"Nafn"}

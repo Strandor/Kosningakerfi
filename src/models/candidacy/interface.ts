@@ -6,5 +6,5 @@ export interface ICandidacy {
   description: string;
   image?: string;
   applicationId: string;
-  candidats?: ICandidats[];
+  candidats: ICandidats[];
 }

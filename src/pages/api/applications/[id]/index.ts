@@ -2,6 +2,9 @@
 
 import { NextApiRequest, NextApiResponse } from "next";
 import { Applications } from "../../../../models";
+import multer from "multer";
+import multerS3 from "multer-s3";
+import { s3 } from "../../../../services";
 
 export default async (
   { method, query }: NextApiRequest,
@@ -13,7 +16,7 @@ export default async (
         where: {
           id: query.id,
         },
-        attributes: ["id", "name", "numApplicants"],
+        attributes: ["id", "name", "minNumApplicants", "maxNumApplicants"],
       });
 
       if (!doc)
