@@ -1,5 +1,5 @@
 import { IProps } from "./interface";
-import styles from "./DropDownItem.module.css";
+import styles from "./DropdownItem.module.css";
 
 export const DropdownItem = ({ text, children }: IProps) => {
   return (
