@@ -1,7 +1,7 @@
 import { ApplicationsActions } from "../../actions";
 import { Reducer } from "../../types";
 import { ApplicationsState } from "./interface";
-import { initialState } from "./utilts";
+import { initialState } from "./utils";
 
 export const ApplicationsReducer: Reducer<ApplicationsState> = (
   state = initialState,

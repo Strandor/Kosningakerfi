@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import {
   LoadingWrapper,
@@ -7,26 +7,39 @@ import {
   InputText,
   TextArea,
   GenericButton,
+  InputFile,
 } from "../../../components";
 import {
   StoreState,
   selectApplication,
   ApplicationsState,
+  createCandidacy,
+  CandidacyState,
 } from "../../../redux";
 import { useRouter } from "next/router";
 import _ from "lodash";
-import { Formik, useFormik } from "formik";
+import { FieldArray, Formik, useFormik } from "formik";
+import Error from "next/error";
 
 export interface IProps {
   applications: ApplicationsState;
   selectApplication: typeof selectApplication;
+  candidacy: CandidacyState;
+  createCandidacy: typeof createCandidacy;
 }
 
-export const Application = ({ applications, selectApplication }: IProps) => {
+export const Application = ({
+  applications,
+  selectApplication,
+  createCandidacy,
+  candidacy,
+}: IProps) => {
   const router = useRouter();
+  const id = router.query.id;
+
+  if (!id || typeof id !== "string") return <Error statusCode={404} />;
 
   useEffect(() => {
-    let id = router.query.id;
     if (typeof id == "string") selectApplication(id);
   }, []);
 
@@ -34,6 +47,10 @@ export const Application = ({ applications, selectApplication }: IProps) => {
     initialValues: {},
     onSubmit: (values) => {
       console.log(values);
+      createCandidacy({
+        ...values,
+        applicationId: id,
+      });
     },
   });
 
@@ -53,8 +70,30 @@ export const Application = ({ applications, selectApplication }: IProps) => {
               text={"Framboðstexti"}
               onChange={formik.handleChange}
             />
+            <InputFile
+              id="image"
+              text={"mynd"}
+              onChange={formik.handleChange}
+            />
           </DropdownItem>
-          <GenericButton>Senda inn umsókn</GenericButton>
+          <DropdownItem text={"Nemendur"}>
+            <FieldArray
+              name={"candidates"}
+              validateOnChange={false}
+              render={() =>
+                _.times(applications.selected?.numApplicants, (index) => (
+                  <InputText
+                    id={`candidates.${index}.name`}
+                    text={"Nafn"}
+                    onChange={formik.handleChange}
+                  />
+                ))
+              }
+            />
+          </DropdownItem>
+          <GenericButton loading={candidacy.loading}>
+            Senda inn umsókn
+          </GenericButton>
         </form>
       </MarginWrapper>
     </LoadingWrapper>
@@ -63,10 +102,12 @@ export const Application = ({ applications, selectApplication }: IProps) => {
 
 const mapStateToProps = (state: StoreState) => ({
   applications: state.applications,
+  candidacy: state.candidacy,
 });
 
 const mapDispatchToProps = {
   selectApplication,
+  createCandidacy,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Application);

@@ -13,3 +13,9 @@
   background-color: black;
   color: white;
 }
+
+.loading {
+  margin: 0;
+  padding: 0;
+  height: 5px;
+}
