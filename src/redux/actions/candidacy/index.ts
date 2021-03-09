@@ -6,6 +6,11 @@ export enum CandidacyActions {
   CREATE_CANDIDACY = "CREATE_CANDIDACY",
   CREATE_CANDIDACY_SUCCESS = "CREATE_CANDIDACY_SUCCESS",
   CREATE_CANDIDACY_FAILURE = "CREATE_CANDIDACY_FAILURE",
+  CLEAR_SUCCESS = "CLEAR_SUCCESS",
+}
+
+export function clearSuccess() {
+  return createAction(CandidacyActions.CLEAR_SUCCESS);
 }
 
 export function createCandidacy(payload: ICreateCandidacy) {

@@ -2,6 +2,8 @@
 
 import { NextApiRequest, NextApiResponse } from "next";
 import { Candidacy } from "../../../models";
+import multer from "multer";
+import multers3 from "multer-s3";
 
 export default async (
   { method, body }: NextApiRequest,

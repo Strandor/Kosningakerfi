@@ -21,7 +21,13 @@ export const CandidacyReducer: Reducer<CandidacyState> = (
     case CandidacyActions.CREATE_CANDIDACY_SUCCESS:
       return {
         ...state,
+        success: true,
         loading: false,
+      };
+    case CandidacyActions.CLEAR_SUCCESS:
+      return {
+        ...state,
+        success: false,
       };
     default:
       return {
