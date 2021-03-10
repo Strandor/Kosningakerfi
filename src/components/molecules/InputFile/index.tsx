@@ -10,6 +10,7 @@ export const InputFile = ({ text, id, onChange, setFieldValue }: IProps) => {
         id={id}
         accept="image/*"
         onChange={(event) => {
+          //@ts-ignore
           setFieldValue(id, event.currentTarget.files[0]);
         }}
       />
