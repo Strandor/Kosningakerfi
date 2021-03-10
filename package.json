@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon src/server.ts",
     "build": "next build",
-    "start": "env NODE_ENV=production ts-node dist/src/server.js"
+    "start": "env NODE_ENV=production ts-node src/server.ts"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
