@@ -49,7 +49,7 @@ export const Application = ({
 
   if (!id || typeof id !== "string") return <NextError statusCode={404} />;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     clearSuccess();
     selectApplication(id);
   }, []);

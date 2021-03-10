@@ -4,10 +4,7 @@ import ReactLoading from "react-loading";
 
 export const GenericButton = ({ children, onPress, loading }: IProps) => {
   return (
-    <button
-      className={styles.button}
-      onTouchEnd={!loading ? onPress : undefined}
-    >
+    <button className={styles.button} onClick={!loading ? onPress : undefined}>
       {loading ? <ReactLoading color="gray" type="bubbles" /> : children}
     </button>
   );

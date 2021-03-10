@@ -5,7 +5,7 @@ import { AppState, store, StoreState } from "../redux";
 import "../styles/globals.css";
 import Head from "next/head";
 import { AppProps } from "next/app";
-import { GlobalAlert } from "../components/";
+import { GlobalAlert, Header } from "../components/";
 import { connect } from "react-redux";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
@@ -18,6 +18,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           content="width=device-width, initial-scale=1, maximum-scale=1"
         ></meta>
       </Head>
+      <Header />
       <GlobalAlert />
       <Component {...pageProps} />
     </Provider>

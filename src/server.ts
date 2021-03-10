@@ -21,4 +21,5 @@ app.prepare().then(() => {
   });
 
   server.listen(port);
+  console.log("Listening on port " + port);
 });
