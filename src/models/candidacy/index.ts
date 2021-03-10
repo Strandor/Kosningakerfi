@@ -4,7 +4,7 @@ import {
   Model,
   UUIDV4,
 } from "sequelize";
-import { sequelizeInstance } from "../../utils.ts";
+import { sequelizeInstance } from "../../utils";
 import { Applications } from "../appplications";
 import { Candidats } from "../candidats";
 import { ICandidats } from "../candidats/interface";
@@ -43,7 +43,7 @@ export class Candidacy extends Model implements ICandidacy {
 
       const doc = await Candidacy.create(candidacy, {
         transaction: t,
-        fields: ["name", "description", "applicationId"],
+        fields: ["name", "description", "applicationId", "image"],
       });
 
       const id = doc.getDataValue("id");

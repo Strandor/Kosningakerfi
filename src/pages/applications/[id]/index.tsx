@@ -25,7 +25,7 @@ import {
 } from "../../../redux";
 import { useRouter } from "next/router";
 import _ from "lodash";
-import { FieldArray, Formik, useFormik } from "formik";
+import { FieldArray, Formik } from "formik";
 import NextError from "next/error";
 import { AlertBox } from "../../../components/atom/AlertBox";
 
@@ -54,17 +54,6 @@ export const Application = ({
     selectApplication(id);
   }, []);
 
-  const formik = useFormik({
-    initialValues: {},
-    onSubmit: (values) => {
-      console.log(values);
-      createCandidacy({
-        ...values,
-        applicationId: id,
-      });
-    },
-  });
-
   if (!applications.selected && !applications.isLoading)
     return <NextError statusCode={404} />;
 
@@ -74,46 +63,81 @@ export const Application = ({
         {candidacy.success ? (
           <AlertBox />
         ) : (
-          <form onSubmit={formik.handleSubmit}>
-            <h2>{applications.selected?.name}</h2>
-            <DropdownItem text={"Upplýsingar"}>
-              <InputText
-                id={"name"}
-                text={"Nafn framboðs"}
-                onChange={formik.handleChange}
-              />
-              <TextArea
-                id={"description"}
-                text={"Framboðstexti"}
-                onChange={formik.handleChange}
-              />
-              <InputFile
-                id="image"
-                text={"mynd"}
-                onChange={formik.handleChange}
-              />
-            </DropdownItem>
-            <DropdownItem
-              text={`Nemendur (${applications.selected?.minNumApplicants}-${applications.selected?.maxNumApplicants})`}
-            >
-              <FieldArray
-                name={"candidats"}
-                validateOnChange={false}
-                render={() =>
-                  _.times(applications.selected?.maxNumApplicants, (index) => (
-                    <InputText
-                      id={`candidats.${index}.name`}
-                      text={"Nafn"}
-                      onChange={formik.handleChange}
-                    />
-                  ))
-                }
-              />
-            </DropdownItem>
-            <GenericButton loading={candidacy.loading}>
-              Senda inn umsókn
-            </GenericButton>
-          </form>
+          <Formik
+            initialValues={{
+              image: "",
+            }}
+            onSubmit={(values) => {
+              if (values.image !== "") {
+                //@ts-ignore
+                let reader = new FileReader();
+
+                reader.onload = () => {
+                  createCandidacy({
+                    ...values,
+                    applicationId: id,
+                    image: reader.result,
+                  });
+                };
+
+                reader.readAsDataURL(values.image);
+              } else {
+                createCandidacy({
+                  ...values,
+                  applicationId: id,
+                });
+              }
+            }}
+            render={({ setFieldValue, handleChange, handleSubmit }) => (
+              <>
+                <h2>{applications.selected?.name}</h2>
+                <DropdownItem text={"Upplýsingar"}>
+                  <InputText
+                    id={"name"}
+                    text={"Nafn framboðs"}
+                    onChange={handleChange}
+                  />
+                  <TextArea
+                    id={"description"}
+                    text={"Framboðstexti"}
+                    onChange={handleChange}
+                  />
+                  <InputFile
+                    id="image"
+                    text={"mynd"}
+                    onChange={handleChange}
+                    setFieldValue={setFieldValue}
+                  />
+                </DropdownItem>
+                <DropdownItem
+                  text={`Nemendur (${applications.selected?.minNumApplicants}-${applications.selected?.maxNumApplicants})`}
+                >
+                  <FieldArray
+                    name={"candidats"}
+                    validateOnChange={false}
+                    render={() =>
+                      _.times(
+                        applications.selected?.maxNumApplicants,
+                        (index) => (
+                          <InputText
+                            id={`candidats.${index}.name`}
+                            text={"Nafn"}
+                            onChange={handleChange}
+                          />
+                        )
+                      )
+                    }
+                  />
+                </DropdownItem>
+                <GenericButton
+                  loading={candidacy.loading}
+                  onPress={handleSubmit}
+                >
+                  Senda inn umsókn
+                </GenericButton>
+              </>
+            )}
+          />
         )}
       </MarginWrapper>
     </LoadingWrapper>

@@ -1,5 +1,5 @@
 import { DataTypes, Model, UUIDV4 } from "sequelize";
-import { sequelizeInstance } from "../../utils.ts";
+import { sequelizeInstance } from "../../utils";
 import { IApplications } from "./interface";
 
 export class Applications extends Model implements IApplications {
