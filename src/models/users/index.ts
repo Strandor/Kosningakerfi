@@ -42,7 +42,7 @@ export class Users extends Model implements IUsers {
         const isCorrectPassword = await bcrypt.compare(user.password, password);
         if (!isCorrectPassword) throw Error("Invalid password");
 
-        const session = await this.createSession({
+        const session = await user.createSession({
             userAgent: userAgent,
         });
 
