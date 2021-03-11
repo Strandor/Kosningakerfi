@@ -7,7 +7,14 @@ export default async (req: Request, res: Response) => {
       where: {
         id: req.params.id,
       },
-      attributes: ["id", "name", "minNumApplicants", "maxNumApplicants"],
+      attributes: [
+        "id",
+        "name",
+        "description",
+        "minNumApplicants",
+        "maxNumApplicants",
+        "isAccepting",
+      ],
     });
 
     if (!doc)

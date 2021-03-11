@@ -30,6 +30,8 @@ export class Candidacy extends Model implements ICandidacy {
 
     try {
       if (!applicaiton) throw Error("Application does not exist");
+      if (!applicaiton.isAccepting)
+        throw Error("Application is not accepting new applications");
 
       if (!candidacy.candidats) throw Error("Vantar nemendur");
 

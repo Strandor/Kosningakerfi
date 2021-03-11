@@ -5,8 +5,10 @@ import { IApplications } from "./interface";
 export class Applications extends Model implements IApplications {
   public id: string;
   public name: string;
+  public description?: string;
   public minNumApplicants: number;
   public maxNumApplicants: number;
+  public isAccepting: boolean;
 }
 
 Applications.init(
@@ -15,6 +17,10 @@ Applications.init(
       primaryKey: true,
       type: DataTypes.UUID,
       defaultValue: UUIDV4,
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -33,6 +39,11 @@ Applications.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 1,
+    },
+    isAccepting: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
     },
   },
   {

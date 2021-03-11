@@ -1,10 +1,11 @@
+import { IProps } from "./interface";
 import styles from "./AlertBox.module.css";
 
-export const AlertBox = () => {
+export const AlertBox = ({ title, message }: IProps) => {
   return (
     <div className={styles.outer}>
-      <h3>✅ Við höfum sent þetta inn</h3>
-      <p>Þú ert einu skrefi nær. Við höfum vistað gögnin fyrir kosningar</p>
+      <h3>{title}</h3>
+      <p>{message}</p>
     </div>
   );
 };

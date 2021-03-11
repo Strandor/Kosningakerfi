@@ -60,9 +60,16 @@ export const Application = ({
   return (
     <LoadingWrapper isLoading={applications.isLoading}>
       <MarginWrapper>
+        <h2>{applications.selected?.name}</h2>
+        {applications.selected?.description && (
+          <h4>{applications.selected.description}</h4>
+        )}
         {candidacy.success ? (
-          <AlertBox />
-        ) : (
+          <AlertBox
+            title="✅ Við höfum sent þetta inn"
+            message="Þú ert einu skrefi nær. Við höfum vistað gögnin fyrir kosningar"
+          />
+        ) : applications.selected?.isAccepting ? (
           <Formik
             initialValues={{
               image: "",
@@ -90,7 +97,6 @@ export const Application = ({
             }}
             render={({ setFieldValue, handleChange, handleSubmit }) => (
               <>
-                <h2>{applications.selected?.name}</h2>
                 <DropdownItem text={"Upplýsingar um framboð"}>
                   {applications.selected?.maxNumApplicants != 1 && (
                     <InputText
@@ -143,6 +149,11 @@ export const Application = ({
                 </GenericButton>
               </>
             )}
+          />
+        ) : (
+          <AlertBox
+            title="🚫 Lokað er fyrir framboð"
+            message="Ekki er hægt að skrá framboð fyrir þetta embætti hérna"
           />
         )}
       </MarginWrapper>
