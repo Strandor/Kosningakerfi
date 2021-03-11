@@ -133,7 +133,7 @@ export const Application = ({
                   loading={candidacy.loading}
                   onPress={handleSubmit}
                 >
-                  Senda inn umsókn
+                  Senda inn framboð
                 </GenericButton>
               </>
             )}

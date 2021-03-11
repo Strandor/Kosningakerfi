@@ -16,7 +16,21 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1"
-        ></meta>
+        />
+        <meta name="title" content="Kosningar - 2021" />
+        <meta
+          name="description"
+          content="Kosningarsíða Menntaskólanns í Reykjavík - Árið 2021"
+        />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://kosningar.online/" />
+        <meta property="og:title" content="Kosningar - 2021" />
+        <meta
+          property="og:description"
+          content="Kosningarsíða Menntaskólanns í Reykjavík - Árið 2021"
+        />
+        <meta property="og:image" content="/images/banner.jpg" />
       </Head>
       <Header />
       <GlobalAlert />
