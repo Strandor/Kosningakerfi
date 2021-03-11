@@ -23,7 +23,7 @@ export class Candidacy extends Model implements ICandidacy {
       where: {
         id: candidacy.applicationId,
       },
-      attributes: ["minNumApplicants", "maxNumApplicants"],
+      attributes: ["minNumApplicants", "maxNumApplicants", "isAccepting"],
     });
 
     const t = await sequelizeInstance.transaction();
