@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 export const isDev = process.env.NODE_ENV !== "production";
 const port = isDev ? 3000 : 80;
 
-const app = next({ isDev });
+const app = next({ dev: isDev });
 const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
