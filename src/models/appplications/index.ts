@@ -19,7 +19,7 @@ Applications.init(
       defaultValue: UUIDV4,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     name: {
