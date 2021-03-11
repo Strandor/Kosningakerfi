@@ -41,10 +41,16 @@ export class Candidacy extends Model implements ICandidacy {
       if (max < candidacy.candidats.length)
         throw Error("Of margir nemendur ekki fleiri en " + max);
 
-      const doc = await Candidacy.create(candidacy, {
-        transaction: t,
-        fields: ["name", "description", "applicationId", "image"],
-      });
+      const doc = await Candidacy.create(
+        {
+          ...candidacy,
+          ...(max == 1 && { name: candidacy.candidats[0].name }),
+        },
+        {
+          transaction: t,
+          fields: ["name", "description", "applicationId", "image"],
+        }
+      );
 
       const id = doc.getDataValue("id");
 

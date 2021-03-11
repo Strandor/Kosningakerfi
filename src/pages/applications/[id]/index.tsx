@@ -91,12 +91,14 @@ export const Application = ({
             render={({ setFieldValue, handleChange, handleSubmit }) => (
               <>
                 <h2>{applications.selected?.name}</h2>
-                <DropdownItem text={"Upplýsingar"}>
-                  <InputText
-                    id={"name"}
-                    text={"Nafn framboðs"}
-                    onChange={handleChange}
-                  />
+                <DropdownItem text={"Upplýsingar um framboð"}>
+                  {applications.selected?.maxNumApplicants != 1 && (
+                    <InputText
+                      id={"name"}
+                      text={"Nafn framboðs"}
+                      onChange={handleChange}
+                    />
+                  )}
                   <TextArea
                     id={"description"}
                     text={"Framboðstexti"}
@@ -110,7 +112,11 @@ export const Application = ({
                   />
                 </DropdownItem>
                 <DropdownItem
-                  text={`Nemendur (${applications.selected?.minNumApplicants}-${applications.selected?.maxNumApplicants})`}
+                  text={
+                    applications.selected?.maxNumApplicants == 1
+                      ? "Frambjóðandi"
+                      : `Listi (${applications.selected?.minNumApplicants}-${applications.selected?.maxNumApplicants})`
+                  }
                 >
                   <FieldArray
                     name={"candidats"}
@@ -121,7 +127,7 @@ export const Application = ({
                         (index) => (
                           <InputText
                             id={`candidats.${index}.name`}
-                            text={"Nafn"}
+                            text={"Fullt nafn"}
                             onChange={handleChange}
                           />
                         )
