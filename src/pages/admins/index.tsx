@@ -1,11 +1,21 @@
 import { Formik } from "formik";
+import { connect } from "react-redux";
 import { GenericButton, InputText, MarginWrapper } from "../../components";
+import { authenticate, StoreState, UsersState } from "../../redux";
 
-const Admins = () => {
+interface IProps {
+  users: UsersState;
+  authenticate: typeof authenticate;
+}
+
+const Admins = ({ users, authenticate }: IProps) => {
   return (
     <MarginWrapper>
+      <p>Logged in {users.isLoggedIn ? "true" : "false"}</p>
       <Formik
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => {
+          authenticate(values);
+        }}
         initialValues={{
           username: "",
           password: "",
@@ -22,7 +32,9 @@ const Admins = () => {
               text={"Lykilorð"}
               onChange={handleChange}
             />
-            <GenericButton onPress={handleSubmit}>Skrá inn</GenericButton>
+            <GenericButton onPress={handleSubmit} loading={users.loading}>
+              Skrá inn
+            </GenericButton>
           </>
         )}
       />
@@ -30,4 +42,12 @@ const Admins = () => {
   );
 };
 
-export default Admins;
+const mapStateToProps = (state: StoreState) => ({
+  users: state.users,
+});
+
+const mapDispatchToProps = {
+  authenticate,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Admins);
