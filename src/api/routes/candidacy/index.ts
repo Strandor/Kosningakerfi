@@ -1,4 +1,4 @@
-import { joinRouters } from "../utils";
+import { joinRouters } from "../../utils";
 import create from "./create";
 
 export default joinRouters([

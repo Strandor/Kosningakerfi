@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, Router } from "express";
 
-export type Method = "get" | "post";
+export type Method = "get" | "post" | "delete";
 
 type Route = (req: Request, res: Response) => Promise<void>;
 
@@ -8,7 +8,7 @@ type RouteMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
-) => Promise<void>;
+) => Promise<any>;
 
 export interface IRoute {
   method?: Method;

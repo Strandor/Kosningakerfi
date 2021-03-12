@@ -1,7 +1,7 @@
-import { Candidacy } from "../../../models";
+import { Candidacy } from "../../../../models";
 import { Request, Response } from "express";
-import { s3 } from "../../../services";
-import { AWS_REGION } from "../../../utils";
+import { s3 } from "../../../../services";
+import { AWS_REGION } from "../../../../utils";
 import { v4 as uuidv4 } from "uuid";
 
 export default async (req: Request, res: Response) => {

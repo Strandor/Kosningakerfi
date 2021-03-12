@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Applications, ApplicationsCategory } from "../../../models";
+import { Applications, ApplicationsCategory } from "../../../../models";
 
 export default async (req: Request, res: Response) => {
   try {
