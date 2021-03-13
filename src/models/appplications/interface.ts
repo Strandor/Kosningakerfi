@@ -1,3 +1,5 @@
+import { ICandidacy } from "../candidacy";
+
 export interface IApplications {
   id: string;
   name: string;
@@ -5,4 +7,5 @@ export interface IApplications {
   minNumApplicants: number;
   maxNumApplicants: number;
   isAccepting: boolean;
+  candidacies?: ICandidacy[];
 }

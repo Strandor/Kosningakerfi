@@ -42,7 +42,7 @@ function* onAuthenticateFailure(
 
 function* onFetchUsers() {
   try {
-    const res = yield axios.get("/api/users");
+    const res = yield axios.get("/api/admins/users");
 
     yield put(fetchUsersSuccess(res.data));
   } catch (error) {
@@ -62,7 +62,7 @@ function* onCreateUser(
   action: ExtractActionFromActionCreator<typeof createUser>
 ) {
   try {
-    const res = yield axios.post<IUsers>("/api/users", action.payload);
+    const res = yield axios.post<IUsers>("/api/admins/users", action.payload);
 
     yield put(createUserSuccess(res.data));
   } catch (error) {
@@ -82,7 +82,9 @@ function* onDeleteUser(
   action: ExtractActionFromActionCreator<typeof deleteUser>
 ) {
   try {
-    const res = yield axios.delete<IUsers>(`/api/users/${action.payload}`);
+    const res = yield axios.delete<IUsers>(
+      `/api/admins/users/${action.payload}`
+    );
 
     yield put(deleteUserSuccess(res.data));
   } catch (error) {

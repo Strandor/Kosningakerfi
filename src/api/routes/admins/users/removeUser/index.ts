@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Users } from "../../../../models";
+import { Users } from "../../../../../models";
 
 export default async (req: Request, res: Response) => {
   try {

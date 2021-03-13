@@ -110,3 +110,5 @@ Candidacy.init(
     sequelize: sequelizeInstance,
   }
 );
+
+export * from "./interface";

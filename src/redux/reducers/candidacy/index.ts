@@ -29,6 +29,22 @@ export const CandidacyReducer: Reducer<CandidacyState> = (
         ...state,
         success: false,
       };
+    case CandidacyActions.FETCH_CANDIDACIES:
+      return {
+        ...state,
+        loading: true,
+      };
+    case CandidacyActions.FETCH_CANDIDACIES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        candidacies: action.payload,
+      };
+    case CandidacyActions.FETCH_CANDIDACIES_FAILURE:
+      return {
+        ...state,
+        loading: false,
+      };
     default:
       return {
         ...state,

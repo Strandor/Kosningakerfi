@@ -1,6 +1,6 @@
 import applications from "./applications";
 import candidacy from "./candidacy";
-import users from "./users";
+import admins from "./admins";
 import auth from "./auth";
 import { joinRouters } from "../utils";
 import { fetchAuth } from "../middlewares";
@@ -19,8 +19,8 @@ export default joinRouters([
     route: candidacy,
   },
   {
-    path: "/users",
-    route: users,
+    path: "/admins",
+    route: admins,
     middlewares: [fetchAuth],
   },
 ]);

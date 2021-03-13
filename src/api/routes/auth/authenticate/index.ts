@@ -11,7 +11,7 @@ export default async (req: Request, res: Response) => {
 
     res
       .cookie("session", auth.session.id, {
-        expires: new Date(Date.now() + 100000),
+        expires: new Date(Date.now() + 10000000),
         httpOnly: true,
         sameSite: "strict",
         secure: !isDev,

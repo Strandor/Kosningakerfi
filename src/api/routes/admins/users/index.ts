@@ -1,4 +1,4 @@
-import { joinRouters } from "../../utils";
+import { joinRouters } from "../../../utils";
 import readAll from "./readAll";
 import removeUser from "./removeUser";
 import createUser from "./createUser";

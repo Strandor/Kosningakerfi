@@ -14,6 +14,8 @@ import {
   createCandidacySuccess,
   fetchApplicationsFailure,
   fetchApplicationsSuccess,
+  fetchCandidaciesFailure,
+  fetchCandidaciesSuccess,
   selectApplicationFailure,
 } from "../../actions";
 import { ExtractActionFromActionCreator, GenericError } from "../../types";
@@ -38,9 +40,29 @@ function* onCreateCandiacyFailure(
   );
 }
 
+function* onFetchCandidacy() {
+  try {
+    const res = yield axios.get("/api/admins/candidacy");
+
+    yield put(fetchCandidaciesSuccess(res.data));
+  } catch (error) {
+    yield put(fetchCandidaciesFailure(error));
+  }
+}
+
+function* onFetchCandidacyFailure(
+  error: ExtractActionFromActionCreator<typeof fetchCandidaciesFailure>
+) {
+  yield put(
+    createAlert(error.error.response.data.message ?? error.error.message)
+  );
+}
+
 export function* candidacy() {
   yield all([
     yield takeLatest("CREATE_CANDIDACY", onCreateCandidacy),
     yield takeLatest("CREATE_CANDIDACY_FAILURE", onCreateCandiacyFailure),
+    yield takeLatest("FETCH_CANDIDACIES", onFetchCandidacy),
+    yield takeLatest("FETCH_CANDIDACIES_FAILURE", onFetchCandidacyFailure),
   ]);
 }

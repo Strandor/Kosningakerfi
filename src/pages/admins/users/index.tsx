@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import {
+  AdminWrapper,
   DropdownItem,
   GenericButton,
   InputText,
@@ -34,68 +35,46 @@ const Users = ({ users, fetchUsers, createUser, deleteUser }: IProps) => {
   }, []);
 
   return (
-    <MarginWrapper>
-      <h1>Notendur</h1>
-      <SideHeader
-        links={[
-          {
-            name: "Umsóknir",
-            link: "/admins/users",
-          },
-          {
-            name: "Embætti",
-            link: "/admins/users",
-          },
-          {
-            name: "Kosningalyklar",
-            link: "/admins/users",
-          },
-          {
-            name: "Stjórnendur",
-            link: "/admins/users",
-          },
-        ]}
-      >
-        <LoadingWrapper isLoading={users.loading}>
-          <DropdownItem text={"Búa til nýjan notanda"}>
-            <Formik
-              initialValues={{
-                username: "",
-                password: "",
-              }}
-              onSubmit={(values) => {
-                createUser(values);
-              }}
-            >
-              {({ handleChange, handleSubmit }) => (
-                <>
-                  <InputText
-                    id="username"
-                    text={"Notandanafn"}
-                    onChange={handleChange}
-                  />
-                  <InputText
-                    id="password"
-                    text={"Lykilorð"}
-                    onChange={handleChange}
-                  />
-                  <GenericButton onPress={handleSubmit}>Búa til</GenericButton>
-                </>
-              )}
-            </Formik>
-          </DropdownItem>
-          <DropdownItem text={"Notendur"}>
-            {users.users.map((user) => (
-              <ListIcon
-                title={user.username}
-                icon={"/images/delete.svg"}
-                onIconPress={() => deleteUser(user.id)}
-              />
-            ))}
-          </DropdownItem>
-        </LoadingWrapper>
-      </SideHeader>
-    </MarginWrapper>
+    <AdminWrapper title="Notendur">
+      <LoadingWrapper isLoading={users.loading}>
+        <DropdownItem text={"Búa til nýjan notanda"}>
+          <Formik
+            initialValues={{
+              username: "",
+              password: "",
+            }}
+            onSubmit={(values) => {
+              createUser(values);
+            }}
+          >
+            {({ handleChange, handleSubmit }) => (
+              <>
+                <InputText
+                  id="username"
+                  text={"Notandanafn"}
+                  onChange={handleChange}
+                />
+                <InputText
+                  id="password"
+                  text={"Lykilorð"}
+                  onChange={handleChange}
+                />
+                <GenericButton onPress={handleSubmit}>Búa til</GenericButton>
+              </>
+            )}
+          </Formik>
+        </DropdownItem>
+        <DropdownItem text={"Notendur"}>
+          {users.users.map((user) => (
+            <ListIcon
+              title={user.username}
+              icon={"/images/delete.svg"}
+              onIconPress={() => deleteUser(user.id)}
+            />
+          ))}
+        </DropdownItem>
+      </LoadingWrapper>
+    </AdminWrapper>
   );
 };
 
