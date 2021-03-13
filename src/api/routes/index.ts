@@ -3,7 +3,7 @@ import candidacy from "./candidacy";
 import users from "./users";
 import auth from "./auth";
 import { joinRouters } from "../utils";
-import { fetchAuth } from "..";
+import { fetchAuth } from "../middlewares";
 
 export default joinRouters([
   {
@@ -21,6 +21,7 @@ export default joinRouters([
   {
     path: "/users",
     route: users,
+    middlewares: [fetchAuth],
   },
 ]);
 

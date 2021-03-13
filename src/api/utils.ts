@@ -15,5 +15,6 @@ export const joinRouters = (routes: IRoute[]) => {
       else router.use(route.path, route.route);
     }
   });
+
   return router;
 };
