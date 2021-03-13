@@ -52,6 +52,27 @@ export const UsersReducer: Reducer<UsersState> = (
         loading: false,
         users: [...state.users, action.payload],
       };
+    case UsersActions.CREATE_USER_FAILURE:
+      return {
+        ...state,
+        loading: false,
+      };
+    case UsersActions.DELETE_USER:
+      return {
+        ...state,
+        loading: true,
+      };
+    case UsersActions.DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        users: state.users.filter((user) => user.id !== action.payload.id),
+      };
+    case UsersActions.DELETE_USER_FAILURE:
+      return {
+        ...state,
+        loading: false,
+      };
     default:
       return {
         ...state,

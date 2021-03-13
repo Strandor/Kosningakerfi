@@ -7,6 +7,7 @@
   cursor: pointer;
   margin-bottom: 5px;
   transition: border 0.2s, opacity 0.2s;
+  flex-direction: row;
 }
 
 .outer:hover {
@@ -24,4 +25,5 @@
 .title {
   font-size: 14;
   color: #363636;
+  flex: 1;
 }

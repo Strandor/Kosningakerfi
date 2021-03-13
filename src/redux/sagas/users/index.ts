@@ -6,6 +6,12 @@ import {
   authenticateFailure,
   authenticateSuccess,
   createAlert,
+  createUser,
+  createUsersFailure,
+  createUserSuccess,
+  deleteUser,
+  deleteUserFailure,
+  deleteUserSuccess,
   fetchUsersFailure,
   fetchUsersSuccess,
 } from "../../actions";
@@ -52,11 +58,55 @@ function* onFetchUsersFailure(
   );
 }
 
+function* onCreateUser(
+  action: ExtractActionFromActionCreator<typeof createUser>
+) {
+  try {
+    const res = yield axios.post<IUsers>("/api/users", action.payload);
+
+    yield put(createUserSuccess(res.data));
+  } catch (error) {
+    yield put(createUsersFailure(error));
+  }
+}
+
+function* onCreateUserFailure(
+  error: ExtractActionFromActionCreator<typeof createUsersFailure>
+) {
+  yield put(
+    createAlert(error.error.response.data.message ?? error.error.message)
+  );
+}
+
+function* onDeleteUser(
+  action: ExtractActionFromActionCreator<typeof deleteUser>
+) {
+  try {
+    const res = yield axios.delete<IUsers>(`/api/users/${action.payload}`);
+
+    yield put(deleteUserSuccess(res.data));
+  } catch (error) {
+    yield put(deleteUserFailure(error));
+  }
+}
+
+function* onDeleteUserFailure(
+  error: ExtractActionFromActionCreator<typeof deleteUserFailure>
+) {
+  yield put(
+    createAlert(error.error.response.data.message ?? error.error.message)
+  );
+}
+
 export function* users() {
   yield all([
     yield takeLatest("AUTHENTICATE", onAuthenticate),
     yield takeLatest("AUTHENTICATE_FAILURE", onAuthenticateFailure),
     yield takeLatest("FETCH_USERS", onFetchUsers),
     yield takeLatest("FETCH_USERS_FAILURE", onFetchUsersFailure),
+    yield takeLatest("CREATE_USER", onCreateUser),
+    yield takeLatest("CREATE_USER_FAILURE", onCreateUserFailure),
+    yield takeLatest("DELETE_USER", onDeleteUser),
+    yield takeLatest("DELETE_USER_FAILURE", onDeleteUserFailure),
   ]);
 }

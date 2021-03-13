@@ -1,24 +1,32 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import {
-  ApplicationBox,
   DropdownItem,
   GenericButton,
   InputText,
+  ListIcon,
   LoadingWrapper,
   MarginWrapper,
+  SideHeader,
 } from "../../../components";
-import { SideHeader } from "../../../components/atom/SideHeader";
-import { fetchUsers, StoreState, UsersState } from "../../../redux";
+import {
+  createUser,
+  fetchUsers,
+  StoreState,
+  UsersState,
+  deleteUser,
+} from "../../../redux";
 import Error from "next/error";
 import { Formik } from "formik";
 
 interface IProps {
   users: UsersState;
   fetchUsers: typeof fetchUsers;
+  createUser: typeof createUser;
+  deleteUser: typeof deleteUser;
 }
 
-const Users = ({ users, fetchUsers }: IProps) => {
+const Users = ({ users, fetchUsers, createUser, deleteUser }: IProps) => {
   //if (!users.isLoggedIn) return <Error statusCode={401} />;
 
   useEffect(() => {
@@ -35,8 +43,12 @@ const Users = ({ users, fetchUsers }: IProps) => {
             link: "/admins/users",
           },
           {
+            name: "Embætti",
+            link: "/admins/users",
+          },
+          {
             name: "Kosningalyklar",
-            link: "/admins/votingkeys",
+            link: "/admins/users",
           },
           {
             name: "Stjórnendur",
@@ -51,7 +63,9 @@ const Users = ({ users, fetchUsers }: IProps) => {
                 username: "",
                 password: "",
               }}
-              onSubmit={(values) => console.log(values)}
+              onSubmit={(values) => {
+                createUser(values);
+              }}
             >
               {({ handleChange, handleSubmit }) => (
                 <>
@@ -72,7 +86,11 @@ const Users = ({ users, fetchUsers }: IProps) => {
           </DropdownItem>
           <DropdownItem text={"Notendur"}>
             {users.users.map((user) => (
-              <p>{user.username}</p>
+              <ListIcon
+                title={user.username}
+                icon={"/images/delete.svg"}
+                onIconPress={() => deleteUser(user.id)}
+              />
             ))}
           </DropdownItem>
         </LoadingWrapper>
@@ -87,6 +105,8 @@ const mapStateToProps = (state: StoreState) => ({
 
 const mapDispatchToProps = {
   fetchUsers,
+  createUser,
+  deleteUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Users);

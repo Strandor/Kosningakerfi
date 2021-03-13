@@ -7,33 +7,35 @@ import { Sessions } from "./sessions";
 import { Users } from "./users";
 
 ApplicationsCategory.hasMany(Applications, {
-    foreignKey: "applicationCategoryId",
+  foreignKey: "applicationCategoryId",
 });
 Applications.belongsTo(ApplicationsCategory, {
-    foreignKey: "applicationCategoryId",
+  foreignKey: "applicationCategoryId",
 });
 
 Candidacy.belongsTo(Applications, {
-    foreignKey: "applicationId",
+  foreignKey: "applicationId",
 });
 Applications.hasMany(Candidacy, {
-    foreignKey: "applicationId",
+  foreignKey: "applicationId",
 });
 
 Candidats.belongsTo(Candidacy, {
-    foreignKey: "candidacyId",
+  foreignKey: "candidacyId",
 });
 
 Candidacy.hasMany(Candidats, {
-    foreignKey: "candidacyId",
+  foreignKey: "candidacyId",
 });
 
 Users.hasMany(Sessions, {
-    foreignKey: "userID",
+  onDelete: "cascade",
+  foreignKey: "userID",
 });
 
 Sessions.belongsTo(Users, {
-    foreignKey: "userId",
+  onDelete: "cascade",
+  foreignKey: "userId",
 });
 
 export * from "./applicationsCategory";

@@ -1,0 +1,17 @@
+.outer {
+  display: flex;
+  width: 100%;
+}
+
+.title {
+  flex: 1;
+}
+
+.icon {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.icon:hover {
+  opacity: 0.7;
+}

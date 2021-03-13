@@ -7,6 +7,7 @@ export const ApplicationBox = ({ application }: IProps) => {
     <Link href={`/applications/${application.id}`}>
       <div className={styles.outer}>
         <h5 className={styles.title}>{application.name}</h5>
+        <img src={"/images/arrow.svg"} />
       </div>
     </Link>
   );

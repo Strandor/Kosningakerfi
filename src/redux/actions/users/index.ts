@@ -15,6 +15,10 @@ export enum UsersActions {
   CREATE_USER = "CREATE_USER",
   CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS",
   CREATE_USER_FAILURE = "CREATE_USER_FAILURE",
+
+  DELETE_USER = "DELETE_USER",
+  DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS",
+  DELETE_USER_FAILURE = "DELETE_USER_FAILURE",
 }
 
 export function authenticate(payload: IAuthenticateData) {
@@ -51,4 +55,16 @@ export function createUserSuccess(payload: IUsers) {
 
 export function createUsersFailure<E extends GenericError>(error: E) {
   return createErrorAction(UsersActions.CREATE_USER_FAILURE, error);
+}
+
+export function deleteUser(id: string) {
+  return createAction(UsersActions.DELETE_USER, id);
+}
+
+export function deleteUserSuccess(payload: IUsers) {
+  return createAction(UsersActions.DELETE_USER_SUCCESS, payload);
+}
+
+export function deleteUserFailure<E extends GenericError>(error: E) {
+  return createErrorAction(UsersActions.DELETE_USER_FAILURE, error);
 }
