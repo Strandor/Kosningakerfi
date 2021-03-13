@@ -4,4 +4,5 @@ export interface UsersState {
   loading: boolean;
   isLoggedIn: boolean;
   user?: IUsers;
+  users: IUsers[];
 }

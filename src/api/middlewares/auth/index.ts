@@ -9,9 +9,10 @@ export const fetchAuth = async (
   try {
     const cookie = req.cookies.session;
     if (!cookie) {
-      return res.status(401).send({
+      res.status(401).send({
         message: "Missing cookie",
       });
+      return;
     }
 
     const session = await Sessions.findOne({
@@ -25,9 +26,10 @@ export const fetchAuth = async (
     });
 
     if (!session) {
-      return res.status(401).send({
+      res.status(401).send({
         message: "Invalid ession",
       });
+      return;
     }
 
     req.body.user = session.user;
