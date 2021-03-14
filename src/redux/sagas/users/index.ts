@@ -1,4 +1,5 @@
 import axios from "axios";
+import Router from "next/router";
 import { all, put, takeLatest } from "redux-saga/effects";
 import { IUsers } from "../../../models/users/interface";
 import {
@@ -30,6 +31,10 @@ function* onAuthenticate(
   } catch (error) {
     yield put(authenticateFailure(error));
   }
+}
+
+function* onAuthenticateSuccess() {
+  yield Router.push("/admins/candidacy");
 }
 
 function* onAuthenticateFailure(
@@ -103,6 +108,7 @@ function* onDeleteUserFailure(
 export function* users() {
   yield all([
     yield takeLatest("AUTHENTICATE", onAuthenticate),
+    yield takeLatest("AUTHENTICATE_SUCCESS", onAuthenticateSuccess),
     yield takeLatest("AUTHENTICATE_FAILURE", onAuthenticateFailure),
     yield takeLatest("FETCH_USERS", onFetchUsers),
     yield takeLatest("FETCH_USERS_FAILURE", onFetchUsersFailure),
