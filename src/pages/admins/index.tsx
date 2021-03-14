@@ -1,6 +1,11 @@
 import { Formik } from "formik";
 import { connect } from "react-redux";
-import { GenericButton, InputText, MarginWrapper } from "../../components";
+import {
+  GenericButton,
+  InputPassword,
+  InputText,
+  MarginWrapper,
+} from "../../components";
 import { authenticate, StoreState, UsersState } from "../../redux";
 
 interface IProps {
@@ -27,7 +32,7 @@ const Admins = ({ users, authenticate }: IProps) => {
               text={"Notandanafn"}
               onChange={handleChange}
             />
-            <InputText
+            <InputPassword
               id="password"
               text={"Lykilorð"}
               onChange={handleChange}

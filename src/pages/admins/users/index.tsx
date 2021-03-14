@@ -4,6 +4,7 @@ import {
   AdminWrapper,
   DropdownItem,
   GenericButton,
+  InputPassword,
   InputText,
   ListIcon,
   LoadingWrapper,
@@ -28,7 +29,7 @@ interface IProps {
 }
 
 const Users = ({ users, fetchUsers, createUser, deleteUser }: IProps) => {
-  //if (!users.isLoggedIn) return <Error statusCode={401} />;
+  if (!users.isLoggedIn) return <Error statusCode={401} />;
 
   useEffect(() => {
     fetchUsers();
@@ -54,7 +55,7 @@ const Users = ({ users, fetchUsers, createUser, deleteUser }: IProps) => {
                   text={"Notandanafn"}
                   onChange={handleChange}
                 />
-                <InputText
+                <InputPassword
                   id="password"
                   text={"Lykilorð"}
                   onChange={handleChange}

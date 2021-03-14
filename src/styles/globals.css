@@ -17,6 +17,7 @@ a {
 }
 
 input[type="text"],
+input[type="password"],
 textarea {
   /* Remove First */
   -webkit-appearance: none;

@@ -12,6 +12,9 @@ export enum UsersActions {
   FETCH_USERS_SUCEESS = "FETCH_USERS_SUCCESS",
   FETCH_USERS_FAILURE = "FETCH_USERS_FAILURE",
 
+  FETCH_CURRENT_USER = "FETCH_CURRENT_USER",
+  FETCH_CURRENT_USER_SUCCESS = "FETCH_CURRENT_USER_SUCCESS",
+
   CREATE_USER = "CREATE_USER",
   CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS",
   CREATE_USER_FAILURE = "CREATE_USER_FAILURE",
@@ -31,6 +34,14 @@ export function authenticateSuccess(payload: IUsers) {
 
 export function authenticateFailure<E extends GenericError>(error: E) {
   return createErrorAction(UsersActions.AUTHENTICATE_FAILURE, error);
+}
+
+export function fetchCurrentUser() {
+  return createAction(UsersActions.FETCH_CURRENT_USER);
+}
+
+export function fetchCurrentUserSuccess(payload: IUsers) {
+  return createAction(UsersActions.FETCH_CURRENT_USER_SUCCESS, payload);
 }
 
 export function fetchUsers() {

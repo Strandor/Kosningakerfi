@@ -2,6 +2,7 @@ import { joinRouters } from "../../../utils";
 import readAll from "./readAll";
 import removeUser from "./removeUser";
 import createUser from "./createUser";
+import currentUser from "./currentUser";
 
 export default joinRouters([
   {
@@ -18,5 +19,10 @@ export default joinRouters([
     method: "post",
     route: createUser,
     path: "/",
+  },
+  {
+    method: "get",
+    route: currentUser,
+    path: "/current",
   },
 ]);

@@ -6,16 +6,22 @@ import {
   ListIcon,
   LoadingWrapper,
 } from "../../../components";
-import { StoreState, fetchCandidacies, CandidacyState } from "../../../redux";
+import {
+  StoreState,
+  fetchCandidacies,
+  CandidacyState,
+  UsersState,
+} from "../../../redux";
 import Error from "next/error";
 
 interface IProps {
+  users: UsersState;
   candidacy: CandidacyState;
   fetchCandidacies: typeof fetchCandidacies;
 }
 
-const Candidacy = ({ fetchCandidacies, candidacy }: IProps) => {
-  //if (!users.isLoggedIn) return <Error statusCode={401} />;
+const Candidacy = ({ users, fetchCandidacies, candidacy }: IProps) => {
+  if (!users.isLoggedIn) return <Error statusCode={401} />;
 
   useEffect(() => {
     fetchCandidacies();
@@ -43,6 +49,7 @@ const Candidacy = ({ fetchCandidacies, candidacy }: IProps) => {
 
 const mapStateToProps = (state: StoreState) => ({
   candidacy: state.candidacy,
+  users: state.users,
 });
 
 const mapDispatchToProps = {
