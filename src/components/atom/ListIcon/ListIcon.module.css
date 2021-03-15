@@ -1,17 +1,33 @@
 .outer {
-  display: flex;
-  width: 100%;
+    display: flex;
+    width: 100%;
 }
 
 .title {
-  flex: 1;
+    flex: 1;
 }
 
 .icon {
-  cursor: pointer;
-  transition: opacity 0.2s;
+    cursor: pointer;
+    transition: opacity 0.2s;
 }
 
 .icon:hover {
-  opacity: 0.7;
+    opacity: 0.7;
+}
+
+.arrow_container {
+    cursor: pointer;
+    margin: 10px 10px 10px 0;
+    display: flex;
+    border-radius: 50%;
+    background-color: gray;
+    height: 35px;
+    width: 35px;
+    align-content: center;
+    justify-content: center;
+}
+
+.arrow_container img {
+    width: 60%;
 }

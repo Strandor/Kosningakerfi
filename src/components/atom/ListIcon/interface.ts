@@ -1,5 +1,5 @@
 export interface IProps {
-  onIconPress: () => any;
-  title: string;
-  icon: string;
+    onIconPress?: () => any;
+    title: string;
+    icon?: string;
 }
