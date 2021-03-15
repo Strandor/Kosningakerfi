@@ -9,7 +9,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
             include: [
                 {
                     model: Candidacy,
-                    attributes: ["id", "name", "description"],
+                    attributes: ["id", "name", "image", "description"],
                     include: [
                         {
                             model: Candidats,

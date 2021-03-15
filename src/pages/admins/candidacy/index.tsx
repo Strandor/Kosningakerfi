@@ -38,6 +38,19 @@ const Candidacy = ({ users, fetchCandidacies, candidacy }: IProps) => {
                                 <ListIcon title={candidacy.name}>
                                     <TitleHeader>Framboðstexti</TitleHeader>
                                     <p>{candidacy.description}</p>
+                                    {candidacy.image && (
+                                        <>
+                                            <TitleHeader>Mynd</TitleHeader>
+                                            <img
+                                                src={candidacy.image}
+                                                style={{
+                                                    maxHeight: "200px",
+                                                    maxWidth: "100%",
+                                                    borderRadius: "10px",
+                                                }}
+                                            />
+                                        </>
+                                    )}
                                     <TitleHeader>Nemendur</TitleHeader>
                                     <ul>
                                         {candidacy.candidats.map((candidat) => (
