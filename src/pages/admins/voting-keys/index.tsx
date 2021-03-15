@@ -10,6 +10,7 @@ import {
     LoadingWrapper,
     MarginWrapper,
     SideHeader,
+    TitleHeader,
 } from "../../../components";
 import {
     createVotingKey,
@@ -78,7 +79,18 @@ const VotingKeys = ({
                 </DropdownItem>
                 <DropdownItem text="Lyklar">
                     {votingKeys.votingKeys.map((votingKey) => (
-                        <ListIcon title={votingKey.code} />
+                        <ListIcon title={votingKey.id}>
+                            <TitleHeader>Framtíðin</TitleHeader>
+                            <p>{votingKey.isFramtidin ? "Já" : "Nei"}</p>
+                            <TitleHeader>Notaður</TitleHeader>
+                            <p>
+                                {votingKey.usedAt
+                                    ? votingKey.usedAt
+                                    : "Ónotaður"}
+                            </p>
+                            <TitleHeader>Búin til af</TitleHeader>
+                            <p>{votingKey.user && votingKey.user.username}</p>
+                        </ListIcon>
                     ))}
                 </DropdownItem>
             </LoadingWrapper>

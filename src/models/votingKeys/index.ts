@@ -2,12 +2,14 @@ import { DataTypes, Model, UUIDV4 } from "sequelize";
 import { sequelizeInstance } from "../../utils";
 import { IVotingKeys } from "./interface";
 import crypto from "crypto";
+import { Users } from "..";
 
 export class VotingKeys extends Model implements IVotingKeys {
     public id: string;
     public code: string;
     public isFramtidin: boolean;
     public usedAt: Date;
+    public user?: Users;
 }
 
 VotingKeys.init(
@@ -16,11 +18,6 @@ VotingKeys.init(
             type: DataTypes.UUID,
             defaultValue: UUIDV4,
             primaryKey: true,
-        },
-        code: {
-            type: DataTypes.STRING(10),
-            allowNull: true,
-            unique: true,
         },
         isFramtidin: {
             type: DataTypes.BOOLEAN,
@@ -41,9 +38,5 @@ VotingKeys.init(
         sequelize: sequelizeInstance,
     }
 );
-
-VotingKeys.beforeCreate(async (votingKey) => {
-    votingKey.code = crypto.randomBytes(5).toString("hex");
-});
 
 export * from "./interface";

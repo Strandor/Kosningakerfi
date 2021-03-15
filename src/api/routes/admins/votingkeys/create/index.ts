@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { VotingKeys } from "../../../../../models/votingKeys";
+import { VotingKeys, Users } from "../../../../../models";
 
 export default async (req: Request, res: Response) => {
     try {
@@ -14,7 +14,13 @@ export default async (req: Request, res: Response) => {
         );
 
         await doc.reload({
-            attributes: ["id", "code", "usedAt"],
+            attributes: ["id", "usedAt"],
+            include: [
+                {
+                    model: Users,
+                    attributes: ["username"],
+                },
+            ],
         });
 
         res.send(doc);

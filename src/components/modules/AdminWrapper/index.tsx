@@ -13,7 +13,7 @@ export const AdminWrapper = ({ children, title }: IProps) => {
                     },
                     {
                         name: "Kosningalyklar",
-                        link: "/admins/votingkeys",
+                        link: "/admins/voting-keys",
                     },
                     {
                         name: "Stjórnendur",

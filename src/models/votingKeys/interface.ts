@@ -1,6 +1,8 @@
+import { Users } from "..";
+
 export interface IVotingKeys {
-  id: string;
-  code: string;
-  isFramtidin: boolean;
-  usedAt: Date;
+    id: string;
+    isFramtidin: boolean;
+    usedAt: Date;
+    user?: Users;
 }

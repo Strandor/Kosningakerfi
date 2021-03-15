@@ -1,10 +1,16 @@
 import { Request, Response } from "express";
-import { VotingKeys } from "../../../../../models/votingKeys";
+import { Users, VotingKeys } from "../../../../../models";
 
 export default async (req: Request, res: Response) => {
     try {
         const doc = await VotingKeys.findAll({
-            attributes: ["id", "code", "usedAt"],
+            attributes: ["id", "usedAt"],
+            include: [
+                {
+                    model: Users,
+                    attributes: ["username"],
+                },
+            ],
         });
 
         res.send(doc);
