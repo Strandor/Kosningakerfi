@@ -7,10 +7,10 @@ export default async (req: Request, res: Response) => {
     const doc = await Announcements.findAll({
       where: {
         startAt: {
-          [Op.gte]: new Date(),
+          [Op.lte]: new Date(),
         },
         endAt: {
-          [Op.lte]: new Date(),
+          [Op.gte]: new Date(),
         },
       },
     });
