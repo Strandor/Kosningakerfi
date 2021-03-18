@@ -4,6 +4,7 @@ import admins from "./admins";
 import auth from "./auth";
 import { joinRouters } from "../utils";
 import { fetchAuth } from "../middlewares";
+import announcements from "./announcements";
 
 export default joinRouters([
   {
@@ -17,6 +18,10 @@ export default joinRouters([
   {
     path: "/candidacy",
     route: candidacy,
+  },
+  {
+    path: "/announcements",
+    route: announcements,
   },
   {
     path: "/admins",
