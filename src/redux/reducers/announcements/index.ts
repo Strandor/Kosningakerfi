@@ -30,6 +30,7 @@ export const AnnouncementsReducer: Reducer<AnnouncementsState> = (
       };
     case AnnouncementsActions.CLOSE_ANNOUNCEMENT:
       return {
+        ...state,
         announcements: state.announcements.splice(1),
       };
     default:
