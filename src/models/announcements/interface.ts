@@ -1,6 +1,5 @@
 export interface IAnnouncements {
-    text: string;
-    startAt: Date;
-    endAt: Date;
-    userId: string;
+  text: string;
+  startAt: Date;
+  endAt: Date;
 }

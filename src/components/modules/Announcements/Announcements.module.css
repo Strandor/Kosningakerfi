@@ -1,13 +1,28 @@
 .outer {
-    top: 0;
-    width: 100%;
-    position: fixed;
-    background-color: #c11c2d;
-    display: flex;
-    align-self: center;
+  top: 0;
+  width: 100%;
+  position: fixed;
+  background-color: #c11c2d;
+  padding: 2px 20px;
 }
 
 .outer p {
-    text-align: center;
-    color: white;
+  font-size: 12px;
+  text-align: center;
+  color: white;
+  text-align: center;
+}
+
+.outer img {
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  transition: opacity 0.2s;
+}
+
+.outer img:hover {
+  opacity: 0.7;
 }

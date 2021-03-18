@@ -8,51 +8,43 @@ import { VotingKeys } from "./votingKeys";
 import { Announcements } from "./announcements";
 
 ApplicationsCategory.hasMany(Applications, {
-    foreignKey: "applicationCategoryId",
+  foreignKey: "applicationCategoryId",
 });
 Applications.belongsTo(ApplicationsCategory, {
-    foreignKey: "applicationCategoryId",
+  foreignKey: "applicationCategoryId",
 });
 
 Candidacy.belongsTo(Applications, {
-    foreignKey: "applicationId",
+  foreignKey: "applicationId",
 });
 Applications.hasMany(Candidacy, {
-    foreignKey: "applicationId",
+  foreignKey: "applicationId",
 });
 
 Candidats.belongsTo(Candidacy, {
-    foreignKey: "candidacyId",
+  foreignKey: "candidacyId",
 });
 
 Candidacy.hasMany(Candidats, {
-    foreignKey: "candidacyId",
+  foreignKey: "candidacyId",
 });
 
 Users.hasMany(Sessions, {
-    onDelete: "cascade",
-    foreignKey: "userID",
+  onDelete: "cascade",
+  foreignKey: "userID",
 });
 
 Sessions.belongsTo(Users, {
-    onDelete: "cascade",
-    foreignKey: "userId",
+  onDelete: "cascade",
+  foreignKey: "userId",
 });
 
 Users.hasMany(VotingKeys, {
-    foreignKey: "userId",
+  foreignKey: "userId",
 });
 
 VotingKeys.belongsTo(Users, {
-    foreignKey: "userId",
-});
-
-Announcements.belongsTo(Users, {
-    foreignKey: "userId",
-});
-
-Users.hasMany(Announcements, {
-    foreignKey: "userId",
+  foreignKey: "userId",
 });
 
 export * from "./applicationsCategory";
