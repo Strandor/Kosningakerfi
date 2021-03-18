@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import { Op } from "sequelize/types";
+import { Op } from "sequelize";
 import { Announcements } from "../../../../models";
 
 export default async (req: Request, res: Response) => {
