@@ -1,0 +1,24 @@
+.outer {
+    border-radius: 10px;
+    padding: 7px;
+    margin: 5px 2px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.outer:hover {
+    background-color: #f0f3f4;
+}
+
+.outer p {
+    margin: 0 0 0 10px;
+}
+
+.checkbox {
+    display: flex;
+    background-color: red;
+    height: 50px;
+    width: 50px;
+}

@@ -1,4 +1,3 @@
-import { Session } from "inspector";
 import { ApplicationsCategory } from "./applicationsCategory";
 import { Applications } from "./appplications";
 import { Candidacy } from "./candidacy";
@@ -6,6 +5,7 @@ import { Candidats } from "./candidats";
 import { Sessions } from "./sessions";
 import { Users } from "./users";
 import { VotingKeys } from "./votingKeys";
+import { Announcements } from "./announcements";
 
 ApplicationsCategory.hasMany(Applications, {
     foreignKey: "applicationCategoryId",
@@ -47,9 +47,18 @@ VotingKeys.belongsTo(Users, {
     foreignKey: "userId",
 });
 
+Announcements.belongsTo(Users, {
+    foreignKey: "userId",
+});
+
+Users.hasMany(Announcements, {
+    foreignKey: "userId",
+});
+
 export * from "./applicationsCategory";
 export * from "./appplications";
 export * from "./candidacy";
 export * from "./sessions";
 export * from "./users";
 export * from "./votingKeys";
+export * from "./announcements";

@@ -4,7 +4,7 @@ import { Users, VotingKeys } from "../../../../../models";
 export default async (req: Request, res: Response) => {
     try {
         const doc = await VotingKeys.findAll({
-            attributes: ["id", "usedAt"],
+            attributes: ["id", "isFramtidin", "usedAt"],
             include: [
                 {
                     model: Users,

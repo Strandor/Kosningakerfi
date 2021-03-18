@@ -1,0 +1,13 @@
+.outer {
+    top: 0;
+    width: 100%;
+    position: fixed;
+    background-color: #c11c2d;
+    display: flex;
+    align-self: center;
+}
+
+.outer p {
+    text-align: center;
+    color: white;
+}

@@ -6,3 +6,4 @@ export * from "./TitleHeader";
 export * from "./GenericButton";
 export * from "./ListIcon";
 export * from "./SideHeader";
+export * from "./CheckboxInput";
