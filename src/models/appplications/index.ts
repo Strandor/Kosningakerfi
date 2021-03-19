@@ -8,7 +8,9 @@ export class Applications extends Model implements IApplications {
   public description?: string;
   public minNumApplicants: number;
   public maxNumApplicants: number;
+  public maxVotes: number;
   public isAccepting: boolean;
+  public isFramtidin: boolean;
 }
 
 Applications.init(
@@ -40,10 +42,20 @@ Applications.init(
       allowNull: false,
       defaultValue: 1,
     },
+    maxVotes: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+    },
     isAccepting: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: true,
+    },
+    isFramtidin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   },
   {

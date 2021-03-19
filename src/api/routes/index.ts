@@ -1,10 +1,12 @@
+import { joinRouters } from "../utils";
+import { fetchAuth } from "../middlewares";
+
 import applications from "./applications";
 import candidacy from "./candidacy";
 import admins from "./admins";
 import auth from "./auth";
-import { joinRouters } from "../utils";
-import { fetchAuth } from "../middlewares";
 import announcements from "./announcements";
+import voting from "./voting";
 
 export default joinRouters([
   {
@@ -22,6 +24,10 @@ export default joinRouters([
   {
     path: "/announcements",
     route: announcements,
+  },
+  {
+    path: "/voting",
+    route: voting,
   },
   {
     path: "/admins",

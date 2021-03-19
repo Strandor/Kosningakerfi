@@ -6,6 +6,8 @@ export interface IApplications {
   description?: string;
   minNumApplicants: number;
   maxNumApplicants: number;
+  maxVotes: number;
   isAccepting: boolean;
+  isFramtidin: boolean;
   candidacies?: ICandidacy[];
 }
