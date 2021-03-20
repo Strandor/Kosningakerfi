@@ -23,7 +23,7 @@ export default async (req: Request, res: Response) => {
 			include: [
 				{
 					model: Candidacy,
-					attributes: ["id", "name", "image"],
+					attributes: ["id", "name", "description", "image"],
 					include: [
 						{
 							model: Candidats,

@@ -7,7 +7,7 @@ export const CandidacyList = ({ candidacy }: IProps) => {
 	return (
 		<ListIcon title={candidacy.name}>
 			<TitleHeader>Framboðstexti</TitleHeader>
-			<p>{candidacy.description}</p>
+			<p className={styles.description}>{candidacy.description}</p>
 			{candidacy.image && (
 				<>
 					<TitleHeader>Mynd</TitleHeader>
