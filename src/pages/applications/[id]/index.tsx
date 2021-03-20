@@ -66,9 +66,14 @@ export const Application = ({
 					<h4>{applications.selected.description}</h4>
 				)}
 				<DropdownItem text="Framboð">
-					{applications.selected?.candidacies.map((candidacy) => (
-						<CandidacyList candidacy={candidacy} />
-					))}
+					{applications.selected &&
+					applications.selected?.candidacies.length > 0 ? (
+						applications.selected?.candidacies.map((candidacy) => (
+							<CandidacyList candidacy={candidacy} />
+						))
+					) : (
+						<p>Engin framboð</p>
+					)}
 				</DropdownItem>
 				{candidacy.success ? (
 					<AlertBox
