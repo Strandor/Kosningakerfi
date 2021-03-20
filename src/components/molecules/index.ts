@@ -3,3 +3,4 @@ export * from "./TextArea";
 export * from "./InputFile";
 export * from "./InputPassword";
 export * from "./RadioButton";
+export * from "./CandidacyList";

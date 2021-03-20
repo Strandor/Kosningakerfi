@@ -1,29 +1,69 @@
 import { Formik } from "formik";
-import { GenericButton, InputText, MarginWrapper } from "../../components";
-import styles from "./Voting.module.css";
+import React from "react";
+import { connect } from "react-redux";
+import {
+	DropdownItem,
+	GenericButton,
+	InputText,
+	MarginWrapper,
+	RadioButton,
+} from "../../components";
+import { StoreState, fetchVoting, VotingState } from "../../redux";
 
-const Voting = () => {
-  return (
-    <MarginWrapper>
-      <div className={styles.header}>
-        <h1 className={styles.title}>Kosning MR</h1>
-        <p>Hello</p>
-      </div>
-      <Formik
-        initialValues={{
-          code: "",
-        }}
-        onSubmit={(values) => console.log(values)}
-      >
-        {({ handleChange, handleSubmit }) => (
-          <>
-            <InputText id="code" text="Kóði" onChange={handleChange} />
-            <GenericButton onPress={handleSubmit}>Senda inn</GenericButton>
-          </>
-        )}
-      </Formik>
-    </MarginWrapper>
-  );
+interface IProps {
+	fetchVoting: typeof fetchVoting;
+	voting: VotingState;
+}
+
+const Voting = ({ voting, fetchVoting }: IProps) => {
+	return (
+		<MarginWrapper>
+			{voting.voting?.votingKey ? (
+				<Formik initialValues={{}} onSubmit={(values) => console.log(values)}>
+					{({ handleSubmit }) => (
+						<>
+							{voting.voting?.applications.map((application) => (
+								<DropdownItem
+									text={`${application.name} (${application.maxVotes})`}
+								>
+									{application.candidacies.map((candidacy) => (
+										<RadioButton text={candidacy.name} />
+									))}
+								</DropdownItem>
+							))}
+							<GenericButton onPress={handleSubmit}>Senda inn</GenericButton>
+						</>
+					)}
+				</Formik>
+			) : (
+				<Formik
+					initialValues={{
+						votingKey: "",
+					}}
+					onSubmit={(values) => {
+						fetchVoting(values);
+					}}
+				>
+					{({ handleChange, handleSubmit }) => (
+						<>
+							<InputText id="votingKey" text="Kóði" onChange={handleChange} />
+							<GenericButton onPress={handleSubmit} loading={voting.loading}>
+								Senda inn
+							</GenericButton>
+						</>
+					)}
+				</Formik>
+			)}
+		</MarginWrapper>
+	);
 };
 
-export default Voting;
+const mapStateToProps = (state: StoreState) => ({
+	voting: state.voting,
+});
+
+const mapDispatchToProps = {
+	fetchVoting,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Voting);
