@@ -65,7 +65,6 @@ export const Application = ({
 				{applications.selected?.description && (
 					<h4>{applications.selected.description}</h4>
 				)}
-				{/*}
 				<DropdownItem text="Framboð">
 					{applications.selected &&
 					applications.selected?.candidacies.length > 0 ? (
@@ -76,7 +75,6 @@ export const Application = ({
 						<p>Engin framboð</p>
 					)}
 				</DropdownItem>
-                    */}
 				{candidacy.success ? (
 					<AlertBox
 						title="✅ Við höfum sent þetta inn"
