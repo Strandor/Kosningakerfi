@@ -1,4 +1,4 @@
-import { Formik } from "formik";
+import { FieldArray, Formik } from "formik";
 import React from "react";
 import { connect } from "react-redux";
 import {
@@ -7,34 +7,40 @@ import {
 	InputText,
 	MarginWrapper,
 	RadioButton,
+	VotingCandidacies,
 } from "../../components";
-import { StoreState, fetchVoting, VotingState } from "../../redux";
+import { StoreState, fetchVoting, VotingState, submitVotes } from "../../redux";
 
 interface IProps {
 	fetchVoting: typeof fetchVoting;
 	voting: VotingState;
+	submitVotes: typeof submitVotes;
 }
 
-const Voting = ({ voting, fetchVoting }: IProps) => {
+const Voting = ({ voting, fetchVoting, submitVotes }: IProps) => {
+	const _isDisabled = (object, application, candidacy) => {
+		if (object[application.id]) return false;
+		return true;
+	};
+
 	return (
 		<MarginWrapper>
 			{voting.voting?.votingKey ? (
-				<Formik initialValues={{}} onSubmit={(values) => console.log(values)}>
-					{({ handleSubmit }) => (
-						<>
-							{voting.voting?.applications.map((application) => (
-								<DropdownItem
-									text={`${application.name} (${application.maxVotes})`}
-								>
-									{application.candidacies.map((candidacy) => (
-										<RadioButton text={candidacy.name} />
-									))}
-								</DropdownItem>
-							))}
-							<GenericButton onPress={handleSubmit}>Senda inn</GenericButton>
-						</>
-					)}
-				</Formik>
+				<>
+					{voting.voting?.applications.map((application) => (
+						<DropdownItem
+							text={`${application.name} (${application.maxVotes})`}
+						>
+							<VotingCandidacies
+								candidacies={application.candidacies}
+								maxVotes={application.maxVotes}
+							/>
+						</DropdownItem>
+					))}
+					<GenericButton onPress={submitVotes} loading={voting.loading}>
+						Senda inn
+					</GenericButton>
+				</>
 			) : (
 				<Formik
 					initialValues={{
@@ -64,6 +70,7 @@ const mapStateToProps = (state: StoreState) => ({
 
 const mapDispatchToProps = {
 	fetchVoting,
+	submitVotes,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Voting);

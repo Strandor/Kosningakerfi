@@ -1,3 +1,5 @@
 export interface IProps {
-    isChecked: boolean;
+	isChecked: boolean;
+	disabled?: boolean;
+	onChange?: (value: boolean) => any;
 }

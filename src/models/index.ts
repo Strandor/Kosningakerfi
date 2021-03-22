@@ -5,7 +5,7 @@ import { Candidats } from "./candidats";
 import { Sessions } from "./sessions";
 import { Users } from "./users";
 import { VotingKeys } from "./votingKeys";
-import { Announcements } from "./announcements";
+import { Votes } from "./votes";
 
 ApplicationsCategory.hasMany(Applications, {
 	foreignKey: "applicationCategoryId",
@@ -47,6 +47,30 @@ VotingKeys.belongsTo(Users, {
 	foreignKey: "userId",
 });
 
+VotingKeys.hasMany(Votes, {
+	foreignKey: "votingKeyId",
+});
+
+Votes.belongsTo(VotingKeys, {
+	foreignKey: "votingKeyId",
+});
+
+Candidacy.hasMany(Votes, {
+	foreignKey: "candidacyId",
+});
+
+Votes.belongsTo(Candidacy, {
+	foreignKey: "candidacyId",
+});
+
+Applications.hasMany(Votes, {
+	foreignKey: "applicationId",
+});
+
+Votes.belongsTo(Applications, {
+	foreignKey: "applicationId",
+});
+
 export * from "./applicationsCategory";
 export * from "./appplications";
 export * from "./candidacy";
@@ -55,3 +79,4 @@ export * from "./users";
 export * from "./votingKeys";
 export * from "./announcements";
 export * from "./interface";
+export * from "./votes";

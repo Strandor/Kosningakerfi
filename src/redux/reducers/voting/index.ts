@@ -56,6 +56,33 @@ export const VotingKeysReducer: Reducer<VotingState> = (
 				...state,
 				loading: false,
 			};
+		case VotingActions.ADD_VOTE:
+			return {
+				...state,
+				votes: [...state.votes, action.payload],
+			};
+		case VotingActions.REMOVE_VOTE:
+			return {
+				...state,
+				votes: state.votes.filter((vote) => vote !== action.payload),
+			};
+		case VotingActions.SUBMIT_VOTES:
+			return {
+				...state,
+				loading: true,
+			};
+		case VotingActions.SUBMIT_VOTES_SUCCESS:
+			return {
+				...state,
+				votingKeys: [],
+				votingKey: undefined,
+				loading: false,
+			};
+		case VotingActions.SUBMIT_VOTES_FAILURE:
+			return {
+				...state,
+				loading: false,
+			};
 		default:
 			return {
 				...state,

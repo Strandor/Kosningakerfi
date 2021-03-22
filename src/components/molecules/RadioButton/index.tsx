@@ -3,17 +3,20 @@ import { CheckboxInput } from "../../atom";
 import styles from "./RadioButton.module.css";
 import { IProps } from "./interface";
 
-export const RadioButton = ({ text }: IProps) => {
-    const [isActive, setActive] = useState(false);
+export const RadioButton = ({ text, disabled, onChange }: IProps) => {
+	const [isActive, setActive] = useState(false);
 
-    const _handleClick = () => {
-        setActive(!isActive);
-    };
+	const _handleClick = () => {
+		if (!disabled) {
+			if (onChange) onChange(!isActive);
+			setActive(!isActive);
+		}
+	};
 
-    return (
-        <div className={styles.outer} onClick={_handleClick}>
-            <CheckboxInput isChecked={isActive} />
-            <p>{text}</p>
-        </div>
-    );
+	return (
+		<div className={styles.outer} onClick={_handleClick}>
+			<CheckboxInput isChecked={isActive} disabled={disabled} />
+			<p>{text}</p>
+		</div>
+	);
 };

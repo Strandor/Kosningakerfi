@@ -1,5 +1,5 @@
 import axios from "axios";
-import { all, put, takeLatest } from "redux-saga/effects";
+import { all, put, select, takeLatest } from "redux-saga/effects";
 import { IVoting, IVotingKeys } from "../../../models";
 import {
 	createAlert,
@@ -11,7 +11,10 @@ import {
 	fetchVotingKeysFailure,
 	fetchVotingKeysSuccess,
 	fetchVotingSuccess,
+	submitVotesFailure,
+	submitVotesSuccess,
 } from "../../actions";
+import { StoreState } from "../../reducers";
 import { ExtractActionFromActionCreator } from "../../types";
 
 function* onFetchVotingKeys() {
@@ -77,6 +80,29 @@ function* onFetchVotingFailure(
 	);
 }
 
+function* onSubmitVotes() {
+	const state: StoreState = yield select();
+
+	try {
+		yield axios.post(
+			`/api/voting/${state.voting.voting?.votingKey.id}`,
+			state.voting.votes
+		);
+
+		yield put(submitVotesSuccess());
+	} catch (error) {
+		yield put(submitVotesFailure(error));
+	}
+}
+
+function* onSubmitVotesFailure(
+	action: ExtractActionFromActionCreator<typeof submitVotesFailure>
+) {
+	yield put(
+		createAlert(action.error.response.data.message ?? action.error.message)
+	);
+}
+
 export function* votingKeys() {
 	yield all([
 		yield takeLatest("FETCH_VOTING_KEYS", onFetchVotingKeys),
@@ -85,5 +111,7 @@ export function* votingKeys() {
 		yield takeLatest("CREATE_VOTING_KEY_FAILURE", onCreateVotingKeyFailure),
 		yield takeLatest("FETCH_VOTING", onFetchVoting),
 		yield takeLatest("FETCH_VOTING_FAILURE", onFetchVotingFailure),
+		yield takeLatest("SUBMIT_VOTES", onSubmitVotes),
+		yield takeLatest("SUBMIT_VOTES_FAILURE", onSubmitVotesFailure),
 	]);
 }

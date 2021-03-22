@@ -16,6 +16,13 @@ export enum VotingActions {
 	CREATE_VOTING_KEY = "CREATE_VOTING_KEY",
 	CREATE_VOTING_KEY_SUCCESS = "CREATE_VOTING_KEY_SUCCESS",
 	CREATE_VOTING_KEY_FAILURE = "CREATE_VOTING_KEY_FAILURE",
+
+	ADD_VOTE = "ADD_VOTE",
+	REMOVE_VOTE = "REMOVE_VOTE",
+
+	SUBMIT_VOTES = "SUBMIT_VOTES",
+	SUBMIT_VOTES_SUCCESS = "SUBMIT_VOTES_SUCCESS",
+	SUBMIT_VOTES_FAILURE = "SUBMIT_VOTES_FAILURE",
 }
 
 export function fetchVoting(payload: IFetchVoting) {
@@ -52,4 +59,24 @@ export function createVotingKeySuccess(payload: IVotingKeys) {
 
 export function createVotingKeyFailure<E extends GenericError>(error: E) {
 	return createErrorAction(VotingActions.CREATE_VOTING_KEY_FAILURE, error);
+}
+
+export function addVote(payload: string) {
+	return createAction(VotingActions.ADD_VOTE, payload);
+}
+
+export function removeVote(payload: string) {
+	return createAction(VotingActions.REMOVE_VOTE, payload);
+}
+
+export function submitVotes() {
+	return createAction(VotingActions.SUBMIT_VOTES);
+}
+
+export function submitVotesSuccess() {
+	return createAction(VotingActions.SUBMIT_VOTES_SUCCESS);
+}
+
+export function submitVotesFailure<E extends GenericError>(error: E) {
+	return createErrorAction(VotingActions.SUBMIT_VOTES_FAILURE, error);
 }
