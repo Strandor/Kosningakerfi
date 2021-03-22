@@ -75,7 +75,7 @@ export const VotingKeysReducer: Reducer<VotingState> = (
 			return {
 				...state,
 				votingKeys: [],
-				votingKey: undefined,
+				voting: undefined,
 				loading: false,
 			};
 		case VotingActions.SUBMIT_VOTES_FAILURE:
