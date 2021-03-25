@@ -48,15 +48,10 @@ export const Application = ({
 	const router = useRouter();
 	const id = router.query.id;
 
-	if (!id || typeof id !== "string") return <NextError statusCode={404} />;
-
 	useEffect(() => {
 		clearSuccess();
 		selectApplication(id);
 	}, []);
-
-	if (!applications.selected && !applications.isLoading)
-		return <NextError statusCode={404} />;
 
 	return (
 		<LoadingWrapper isLoading={applications.isLoading}>
