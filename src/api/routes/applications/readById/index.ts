@@ -24,6 +24,9 @@ export default async (req: Request, res: Response) => {
 				{
 					model: Candidacy,
 					attributes: ["id", "name", "description", "image"],
+					where: {
+						removedAt: null,
+					},
 					include: [
 						{
 							model: Candidats,

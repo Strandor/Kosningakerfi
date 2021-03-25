@@ -1,17 +1,14 @@
 import { DataTypes, Model, UUIDV4 } from "sequelize";
 import { sequelizeInstance } from "../../utils";
 import { IVotingKeys } from "./interface";
-import crypto from "crypto";
-import { Users } from "..";
-import { Votes } from "../votes";
-import { Applications } from "../";
-import { Candidacy } from "../candidacy";
+import { Users, Votes, Candidacy } from "..";
 
 export class VotingKeys extends Model implements IVotingKeys {
 	public id: string;
 	public code: string;
 	public isFramtidin: boolean;
 	public usedAt: Date;
+	public expiresAt?: Date;
 	public user?: Users;
 
 	public async createVotes(votes: string[]) {
@@ -74,6 +71,10 @@ VotingKeys.init(
 			defaultValue: false,
 		},
 		usedAt: {
+			type: DataTypes.DATE,
+			allowNull: true,
+		},
+		expiresAt: {
 			type: DataTypes.DATE,
 			allowNull: true,
 		},

@@ -19,7 +19,12 @@ const Component = ({ voting, application, addVote, removeVote }: IProps) => {
 		<DropdownItem
 			text={`${application.name} (${count}/${application.maxVotes})`}
 		>
-			<p>Þú getur kosið allt að {application.maxVotes}</p>
+			{application.maxVotes > 1 && (
+				<p>
+					Þér er heimilt að greiða allt að <b>{application.maxVotes}</b> aðilum
+					atkvæði
+				</p>
+			)}
 			{application.candidacies.map((candidacy) => (
 				<RadioButton
 					text={candidacy.name}

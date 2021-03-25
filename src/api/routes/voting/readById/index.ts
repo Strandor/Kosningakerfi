@@ -5,7 +5,7 @@ import { Applications, Candidacy, VotingKeys } from "../../../../models";
 export default async (req: Request, res: Response) => {
 	try {
 		const votingKey = await VotingKeys.findOne({
-			attributes: ["id", "isFramtidin"],
+			attributes: ["id", "isFramtidin", "expiresAt"],
 			where: {
 				id: req.params.id,
 				usedAt: null,
@@ -19,12 +19,20 @@ export default async (req: Request, res: Response) => {
 			return;
 		}
 
+		if (votingKey.expiresAt && new Date() > votingKey.expiresAt) {
+			res.status(404).send({
+				message: "Voting key expired",
+			});
+			return;
+		}
+
 		const applications = await Applications.findAll({
 			attributes: ["id", "name", "maxVotes"],
 			where: {
 				isFramtidin: {
 					[Op.or]: [false, votingKey.isFramtidin],
 				},
+				removedAt: null,
 			},
 			include: [
 				{
