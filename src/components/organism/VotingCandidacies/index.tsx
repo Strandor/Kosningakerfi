@@ -1,32 +1,31 @@
 import React, { useMemo } from "react";
 import { connect } from "react-redux";
-import { RadioButton } from "../..";
+import { DropdownItem, RadioButton } from "../..";
 import { StoreState, addVote, removeVote } from "../../../redux";
 import { IProps } from "./interface";
 
-const Component = ({
-	candidacies,
-	voting,
-	maxVotes,
-	addVote,
-	removeVote,
-}: IProps) => {
+const Component = ({ voting, application, addVote, removeVote }: IProps) => {
 	const count = useMemo(() => {
 		console.log(voting.votes);
 		return voting.votes.reduce((pv, cv) => {
-			if (candidacies.find((candidacy) => candidacy.id == cv)) return pv + 1;
+			if (application.candidacies.find((candidacy) => candidacy.id == cv))
+				return pv + 1;
 
 			return pv;
 		}, 0);
 	}, [voting.votes]);
 
 	return (
-		<>
-			{candidacies.map((candidacy) => (
+		<DropdownItem
+			text={`${application.name} (${count}/${application.maxVotes})`}
+		>
+			<p>Þú getur kosið allt að {application.maxVotes}</p>
+			{application.candidacies.map((candidacy) => (
 				<RadioButton
 					text={candidacy.name}
 					disabled={
-						count > maxVotes - 1 && !voting.votes.includes(candidacy.id)
+						count > application.maxVotes - 1 &&
+						!voting.votes.includes(candidacy.id)
 					}
 					onChange={(value) => {
 						if (value) {
@@ -37,7 +36,7 @@ const Component = ({
 					}}
 				/>
 			))}
-		</>
+		</DropdownItem>
 	);
 };
 

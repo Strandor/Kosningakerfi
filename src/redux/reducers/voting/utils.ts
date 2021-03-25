@@ -5,4 +5,5 @@ export const initialState: VotingState = {
 	votingKeys: [],
 	votes: [],
 	voting: undefined,
+	success: false,
 };

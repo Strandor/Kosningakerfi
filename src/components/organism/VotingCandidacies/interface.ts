@@ -1,10 +1,9 @@
-import { ICandidacy } from "../../../models";
+import { IApplications, ICandidacy } from "../../../models";
 import { VotingState, addVote, removeVote } from "../../../redux";
 
 export interface IProps {
-	candidacies: ICandidacy[];
 	voting: VotingState;
-	maxVotes: number;
+	application: IApplications;
 	addVote: typeof addVote;
 	removeVote: typeof removeVote;
 }

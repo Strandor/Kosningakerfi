@@ -5,4 +5,5 @@ export interface VotingState {
 	votingKeys: IVotingKeys[];
 	votes: string[];
 	voting?: IVoting;
+	success: boolean;
 }

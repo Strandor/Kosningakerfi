@@ -1,4 +1,4 @@
-import { DataTypes, Model } from "sequelize";
+import { DataTypes, Model, UUIDV4 } from "sequelize";
 import { Applications } from "..";
 import { sequelizeInstance } from "../../utils";
 import { IVotes } from "./interface";
@@ -11,6 +11,11 @@ export class Votes extends Model implements IVotes {
 
 Votes.init(
 	{
+		id: {
+			type: DataTypes.UUID,
+			defaultValue: UUIDV4,
+			primaryKey: true,
+		},
 		votingKeyId: {
 			type: DataTypes.UUID,
 			allowNull: false,
