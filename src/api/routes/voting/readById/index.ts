@@ -32,12 +32,14 @@ export default async (req: Request, res: Response) => {
 				isFramtidin: {
 					[Op.or]: [false, votingKey.isFramtidin],
 				},
-				removedAt: null,
 			},
 			include: [
 				{
 					model: Candidacy,
 					attributes: ["id", "name"],
+					where: {
+						removedAt: null,
+					},
 					required: true,
 				},
 			],
