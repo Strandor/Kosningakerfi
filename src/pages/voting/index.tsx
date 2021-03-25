@@ -9,6 +9,7 @@ import {
 	LoadingWrapper,
 	MarginWrapper,
 	RadioButton,
+	TitleHeader,
 	VotingCandidacies,
 } from "../../components";
 import { AlertBox } from "../../components/atom/AlertBox";
@@ -44,8 +45,14 @@ const Voting = ({ voting, fetchVoting, submitVotes }: IProps) => {
 				<LoadingWrapper isLoading={voting.loading}>
 					{voting.voting?.votingKey ? (
 						<>
-							{voting.voting?.applications.map((application) => (
-								<VotingCandidacies application={application} />
+							{voting.voting?.applications.map((applicationsCategory) => (
+								<>
+									<TitleHeader>{applicationsCategory.name}</TitleHeader>
+									{applicationsCategory.applications &&
+										applicationsCategory.applications.map((application) => (
+											<VotingCandidacies application={application} />
+										))}
+								</>
 							))}
 							<GenericButton onPress={submitVotes} loading={voting.loading}>
 								Senda inn

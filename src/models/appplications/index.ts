@@ -13,6 +13,7 @@ export class Applications extends Model implements IApplications {
 	public isAccepting: boolean;
 	public isFramtidin: boolean;
 	public candidacies: Candidacy[];
+	public listOrder: number;
 }
 
 Applications.init(
@@ -58,6 +59,12 @@ Applications.init(
 			type: DataTypes.BOOLEAN,
 			allowNull: false,
 			defaultValue: false,
+		},
+		listOrder: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			unique: true,
+			autoIncrement: true,
 		},
 	},
 	{

@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
 import { Op } from "sequelize";
-import { Applications, Candidacy, VotingKeys } from "../../../../models";
+import {
+	Applications,
+	ApplicationsCategory,
+	Candidacy,
+	VotingKeys,
+} from "../../../../models";
 
 export default async (req: Request, res: Response) => {
 	try {
@@ -26,21 +31,31 @@ export default async (req: Request, res: Response) => {
 			return;
 		}
 
-		const applications = await Applications.findAll({
-			attributes: ["id", "name", "maxVotes"],
-			where: {
-				isFramtidin: {
-					[Op.or]: [false, votingKey.isFramtidin],
-				},
-			},
+		const applications = await ApplicationsCategory.findAll({
+			attributes: ["id", "name"],
+			order: [
+				[ApplicationsCategory, "listOrder", "ASC"],
+				[Applications, "listOrder", "ASC"],
+			],
 			include: [
 				{
-					model: Candidacy,
-					attributes: ["id", "name"],
+					model: Applications,
+					attributes: ["id", "name", "maxVotes"],
 					where: {
-						removedAt: null,
+						isFramtidin: {
+							[Op.or]: [false, votingKey.isFramtidin],
+						},
 					},
-					required: true,
+					include: [
+						{
+							model: Candidacy,
+							attributes: ["id", "name"],
+							where: {
+								removedAt: null,
+							},
+							required: true,
+						},
+					],
 				},
 			],
 		});

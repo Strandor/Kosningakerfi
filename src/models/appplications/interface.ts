@@ -10,4 +10,5 @@ export interface IApplications {
 	isAccepting: boolean;
 	isFramtidin: boolean;
 	candidacies: ICandidacy[];
+	listOrder: number;
 }
