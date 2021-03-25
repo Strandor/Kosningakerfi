@@ -23,6 +23,7 @@ export class Candidacy extends Model implements ICandidacy {
 		const applicaiton = await Applications.findOne({
 			where: {
 				id: candidacy.applicationId,
+				removedAt: null,
 			},
 			attributes: ["minNumApplicants", "maxNumApplicants", "isAccepting"],
 		});

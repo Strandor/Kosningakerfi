@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import { Request, Response } from "express";
 import { VotingKeys } from "../../../../models";
 
@@ -13,6 +14,13 @@ export default async (req: Request, res: Response) => {
 		if (!votingKey) {
 			res.status(404).send({
 				message: "Could not find voting key",
+			});
+			return;
+		}
+
+		if (votingKey.expiresAt && new Date() > votingKey.expiresAt) {
+			res.status(404).send({
+				message: "Voting key expired",
 			});
 			return;
 		}
