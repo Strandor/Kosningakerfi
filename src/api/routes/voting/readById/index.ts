@@ -34,7 +34,7 @@ export default async (req: Request, res: Response) => {
 		const applications = await ApplicationsCategory.findAll({
 			attributes: ["id", "name"],
 			order: [
-				[ApplicationsCategory, "listOrder", "ASC"],
+				["listOrder", "ASC"],
 				[Applications, "listOrder", "ASC"],
 			],
 			include: [
