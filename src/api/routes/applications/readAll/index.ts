@@ -12,9 +12,6 @@ export default async (_req: Request, res: Response) => {
 			{
 				model: Applications,
 				attributes: ["id", "name"],
-				where: {
-					isRemoved: null,
-				},
 			},
 		],
 	});
