@@ -36,7 +36,7 @@ export default async (req: Request, res: Response) => {
 			order: [
 				["listOrder", "ASC"],
 				[Applications, "listOrder", "ASC"],
-				[Candidacy, "name", "ASC"],
+				[Applications, Candidacy, "name", "ASC"],
 			],
 			include: [
 				{
